@@ -2,11 +2,16 @@ package cloud.matheusdcunha.cadastro_de_ninjas.missao;
 
 import cloud.matheusdcunha.cadastro_de_ninjas.ninja.NinjaModel;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name="missoes")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MissaoModel {
 
     @Id

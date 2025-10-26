@@ -2,9 +2,15 @@ package cloud.matheusdcunha.cadastro_de_ninjas.ninja;
 
 import cloud.matheusdcunha.cadastro_de_ninjas.missao.MissaoModel;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "ninjas")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class NinjaModel {
 
     @Id
@@ -16,14 +22,4 @@ public class NinjaModel {
 
     @ManyToOne
     private MissaoModel missao;
-
-    public NinjaModel() {}
-
-    public NinjaModel(Long id, String nome, String email, int idade) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.idade = idade;
-    }
-
 }
