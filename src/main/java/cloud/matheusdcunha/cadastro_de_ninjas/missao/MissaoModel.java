@@ -1,0 +1,21 @@
+package cloud.matheusdcunha.cadastro_de_ninjas.missao;
+
+import cloud.matheusdcunha.cadastro_de_ninjas.ninja.NinjaModel;
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name="missoes")
+public class MissaoModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private String dificuldade;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<NinjaModel> ninjas;
+
+}

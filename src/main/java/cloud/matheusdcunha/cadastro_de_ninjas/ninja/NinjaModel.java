@@ -1,5 +1,6 @@
-package cloud.matheusdcunha.cadastro_de_ninjas;
+package cloud.matheusdcunha.cadastro_de_ninjas.ninja;
 
+import cloud.matheusdcunha.cadastro_de_ninjas.missao.MissaoModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,9 @@ public class NinjaModel {
     private String nome;
     private String email;
     private int idade;
+
+    @ManyToOne
+    private MissaoModel missao;
 
     public NinjaModel() {}
 
