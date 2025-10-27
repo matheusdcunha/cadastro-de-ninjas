@@ -19,10 +19,10 @@ public class NinjaController {
         return ninjaService.criarNinja(ninja);
     }
 
-    @PutMapping("/id")
-    public String atualizarNinja(@Request){
-        return "Ninja atualizado";
-    }
+    @PatchMapping("/{id}")
+    public NinjaModel atualizarNinja(@PathVariable Long id, @RequestBody NinjaModel ninja){
+
+        return this.ninjaService.atualizarNinja(id, ninja);    }
 
     @GetMapping()
     public List<NinjaModel> listarNinjas(){
