@@ -2,9 +2,17 @@ package cloud.matheusdcunha.cadastro_de_ninjas.ninja;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ninja")
 public class NinjaController {
+
+    private final NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     @PostMapping()
     public String criarNinja(){
@@ -17,8 +25,8 @@ public class NinjaController {
     }
 
     @GetMapping()
-    public String listarNinjas(){
-        return "Ninjas listado";
+    public List<NinjaModel> listarNinjas(){
+        return this.ninjaService.listarNinjas();
     }
 
     @GetMapping("/id")

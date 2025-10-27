@@ -1,6 +1,7 @@
 package cloud.matheusdcunha.cadastro_de_ninjas.missao;
 
 import cloud.matheusdcunha.cadastro_de_ninjas.ninja.NinjaModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class MissaoModel {
     private String dificuldade;
 
     @OneToMany(mappedBy = "missao")
+    @JsonIgnore
     private List<NinjaModel> ninjas;
 
 }
