@@ -1,38 +1,57 @@
 package cloud.matheusdcunha.cadastro_de_ninjas.ninja;
 
+import cloud.matheusdcunha.cadastro_de_ninjas.missao.MissaoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
+    private final NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
-    public List<NinjaModel> listarNinjas(){
-        return this.ninjaRepository.findAll();
+    public List<NinjaDTO> listarNinjas(){
+        List<NinjaModel> ninjas = ninjaRepository.findAll();
+
+        return ninjas.stream().map(ninjaMapper::map).collect(Collectors.toList());
     }
 
-    public NinjaModel buscarNinjaPorId(Long id){
-        return this.ninjaRepository.findById(id).orElse(null);
+    public NinjaDTO buscarNinjaPorId(Long id){
+        Optional<NinjaModel> ninja = ninjaRepository.findById(id);
+
+        return ninja.map(ninjaMapper::map).orElse(null);
     }
 
-    public NinjaModel criarNinja(NinjaModel ninja){
-        return this.ninjaRepository.save(ninja);
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+        NinjaModel ninja = this.ninjaMapper.map(ninjaDTO);
+        ninja = this.ninjaRepository.save(ninja);
+
+        return this.ninjaMapper.map(ninja);
     }
 
     public void deletarNinja(Long id){
         this.ninjaRepository.deleteById(id);
     }
 
-    public NinjaModel atualizarNinja(Long id, NinjaModel ninja){
-        if(this.ninjaRepository.existsById(id)){
-            ninja.setId(id);
-            return this.ninjaRepository.save(ninja);
+    public NinjaDTO atualizarNinja(Long id, NinjaDTO ninja){
+
+        Optional<NinjaModel> ninjaExistente = this.ninjaRepository.findById(id);
+
+        if(ninjaExistente.isPresent()){
+            NinjaModel ninjaAtualizado = ninjaMapper.map(ninja);
+
+            ninjaAtualizado.setId(id);
+            ninjaAtualizado = this.ninjaRepository.save(ninjaAtualizado);
+
+            return this.ninjaMapper.map(ninjaAtualizado);
         }
 
         return null;
