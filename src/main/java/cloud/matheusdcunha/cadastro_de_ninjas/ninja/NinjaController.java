@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/boas-vindas")
 public class NinjaController {
 
-    @GetMapping("/boas-vindas")
+    @GetMapping()
     public String boasVindas(){
         return "Olá, boas vindas a essa rota";
     }

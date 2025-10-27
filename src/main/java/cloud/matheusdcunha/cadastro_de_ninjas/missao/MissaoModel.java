@@ -20,7 +20,7 @@ public class MissaoModel {
     private String nome;
     private String dificuldade;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "missao")
     private List<NinjaModel> ninjas;
 
 }

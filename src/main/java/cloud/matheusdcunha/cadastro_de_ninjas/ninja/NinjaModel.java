@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class NinjaModel {
 
     @Id
@@ -24,5 +23,6 @@ public class NinjaModel {
     private String email;
 
     @ManyToOne
+    @JoinColumn(name = "missao_id")
     private MissaoModel missao;
 }
