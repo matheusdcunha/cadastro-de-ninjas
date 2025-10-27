@@ -14,11 +14,19 @@ public class NinjaService {
     }
 
     public List<NinjaModel> listarNinjas(){
-        return ninjaRepository.findAll();
+        return this.ninjaRepository.findAll();
     }
 
     public NinjaModel buscarNinjaPorId(Long id){
-        return ninjaRepository.findById(id).orElse(null);
+        return this.ninjaRepository.findById(id).orElse(null);
+    }
+
+    public NinjaModel criarNinja(NinjaModel ninja){
+        return this.ninjaRepository.save(ninja);
+    }
+
+    public void deletarNinja(Long id){
+        this.ninjaRepository.deleteById(id);
     }
 
 }
